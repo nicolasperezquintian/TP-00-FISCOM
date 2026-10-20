@@ -25,6 +25,16 @@ def integrar_euler(
     condición inicial, por lo que tienen ``pasos + 1`` elementos.
     """
 
+    tiempos = np.linspace(0,pasos*dt,pasos+1) #definimos el array de tiempos
+    estados = np.zeros((pasos+1,4)) #definimos el array de estados, va a ser una matriz de pasos filas y 4 columnas ## antes estados = np.zeros((pasos,4)), lo correjí con Copilot
+    estados[0] = estado_inicial #a la primer fila le asignamos el estado inicial
+
+    #evolucionamos el sistema con un bucle for
+    for i in range(pasos):
+        estados[i+1] = estados[i] + dt * derivada(estados[i],gravedad) #Euler explícito
+
+    return tiempos, estados ## antes return tuple[tiempos, estados], lo correjí con copilot
+
     raise NotImplementedError("completar el método de Euler")
 
 
